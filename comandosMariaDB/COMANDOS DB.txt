@@ -1,0 +1,19 @@
+CREATE DATABASE db_test1;
+
+SHOW DATABASES;
+
+USE db_test1;
+
+CREATE TABLE IF NOT EXISTS agenda (
+    ->   uuid CHAR(36) PRIMARY KEY,
+    ->   nombre VARCHAR(255) NOT NULL,
+    ->   telefono VARCHAR(255) DEFAULT NULL,
+    ->   edad INT DEFAULT NULL);
+
+SHOW TABLES;
+
+SHOW COLUMNS FROM agenda;
+
+SELECT * from agenda;
+
+mysql -u root -p; //para entrar de nuevo a MariaDb
