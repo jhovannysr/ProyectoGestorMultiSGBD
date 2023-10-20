@@ -1,1 +1,20 @@
-ok
+departamento                 empleado
+id INTEGER A_i Pk            id INTEGER PK A_i
+nombre varchar               nombre varchar
++jefe varchar fk             salario INTEGER
+                             +departamento varchar FK
+
+
+Menu principal
+Menu departamento, menu empleado
+AgendaDepartamento, AgendaEmpleado
+-PARA INICIAR POR CMD: mysql -u root -p
+-para motrar las columnas de las tablas: SHOW COLUMNS FROM nombre_tabla
+
+CREATE DATABASE empresa;
+CREATE TABLE IF NOT EXISTS departamento (id INT PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(255) NOT NULL,
+ jefe VARCHAR(255) NOT NULL);
+
+CREATE TABLE IF NOT EXISTS empleado (id INT PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(255) NOT NULL,
+ salario INT, departamento VARCHAR(255) NOT NULL);
+
