@@ -1,0 +1,14 @@
+Proyecto
+- dao +
+    - GestorDepartemento
+    - GestorEmpleado
+    - BD "singleton" *
+- io +
+    - IO *
+- model +
+    - Departamento Jean
+    - Empleado Jean
+- view +
+    - MenuMain: Jhovanny 
+    - MenuDepartamento Jhovanny
+    - MenuEmpleado Naim
