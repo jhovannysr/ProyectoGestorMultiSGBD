@@ -1,14 +1,14 @@
 Proyecto
 - dao +
-    - GestorDepartemento
-    - GestorEmpleado
+    - DepartementoGestor "Nos falta repartir los metodos"
+    - EmpleadoGestor "Nos falta repartir los metodos"
     - BD "singleton" *
 - io +
     - IO *
 - model +
-    - Departamento Jean
-    - Empleado Jean
+    - Departamento Jhovanny "Done"
+    - Empleado Jhovanny "Done"
 - view +
-    - MenuMain: Jhovanny 
-    - MenuDepartamento Jhovanny
-    - MenuEmpleado Naim
+    - MenuMain: Jhovanny "Done"
+    - MenuDepartamento Jhovanny 
+    - MenuEmpleado Jhovanny 
