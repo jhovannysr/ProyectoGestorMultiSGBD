@@ -4,12 +4,17 @@ nombre varchar               nombre varchar
 +jefe varchar fk             salario INTEGER
                              +departamento varchar FK
 
-
-Menu principal
-Menu departamento, menu empleado
-AgendaDepartamento, AgendaEmpleado
 -PARA INICIAR POR CMD: mysql -u root -p
 -para motrar las columnas de las tablas: SHOW COLUMNS FROM nombre_tabla
+SHOW DATABASES;
+
+USE db_test1;
+
+SHOW TABLES;
+
+SHOW COLUMNS FROM agenda;
+
+SELECT * from agenda;
 
 CREATE DATABASE empresa;
 CREATE TABLE IF NOT EXISTS departamento (id INT PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(255) NOT NULL,
