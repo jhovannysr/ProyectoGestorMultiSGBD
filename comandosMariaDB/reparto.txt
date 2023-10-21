@@ -1,7 +1,15 @@
 Proyecto
 - dao +
     - DepartementoGestor "Nos falta repartir los metodos"
+        - add Jhovanny "Done" 
+        - show Jhovanny "Done"
+        - 
+        - modify
     - EmpleadoGestor "Nos falta repartir los metodos"
+        - add Jhovanny ""
+        - show Jhovanny ""
+        - delete
+        - modify
     - BD "singleton" *
 - io +
     - IO *
@@ -10,5 +18,5 @@ Proyecto
     - Empleado Jhovanny "Done"
 - view +
     - MenuMain: Jhovanny "Done"
-    - MenuDepartamento Jhovanny 
+    - MenuDepartamento Jhovanny "Done"
     - MenuEmpleado Jhovanny 
