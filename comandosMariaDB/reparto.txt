@@ -3,13 +3,17 @@ Proyecto
     - DepartementoGestor "Nos falta repartir los metodos"
         - add Jhovanny "Done" 
         - show Jhovanny "Done"
-        - 
-        - modify
+        - modify Jhovanny "Done"
+        - QueryByID Jhovanny "Done"
+        - QueryByName 
+        - Delete
     - EmpleadoGestor "Nos falta repartir los metodos"
-        - add Jhovanny ""
-        - show Jhovanny ""
-        - delete
-        - modify
+        - add Jhovanny "Done"
+        - show Jhovanny "Done"
+        - modify Jhovanny "Done"
+        - QueryByID Jhovanny "Done"
+        - QueryByName 
+        - Delete
     - BD "singleton" *
 - io +
     - IO *
@@ -19,4 +23,4 @@ Proyecto
 - view +
     - MenuMain: Jhovanny "Done"
     - MenuDepartamento Jhovanny "Done"
-    - MenuEmpleado Jhovanny 
+    - MenuEmpleado Jhovanny "Done"
