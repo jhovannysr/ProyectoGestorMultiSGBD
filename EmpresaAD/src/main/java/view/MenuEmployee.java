@@ -42,12 +42,24 @@ public class MenuEmployee {
 		IO.println(added ? "Añadido" : "No ha sido posible añadir el empleado");
 	}
 	
+	
 	/**
 	 * (Jhovanny) - Mostrar empleados
 	 * @param employeeDAO
 	 */
 	private void show() {
 		employeeDAO.show().forEach(System.out::println);
+	}
+	/*
+	 * (JeanPaul)Borrar empleado
+	 */
+	private static void deleteEmpleado(EmployeeDAO employeeDAO) {
+	    IO.print("id?");
+	    int id = IO.readInt();
+
+	    boolean deleted = employeeDAO.deleteEmployee(id);
+	    IO.println(deleted ? "Eliminado" : "No ha sido posible eliminar el departamento");
+	    
 	}
 	
 	/**
@@ -83,6 +95,15 @@ public class MenuEmployee {
 		System.out.println(modificado == false ? "Error al modificar" : "modificado exitosamente");
 		return modificado;
 	}
+	/*
+	 * (JeanPaul) - Consulta por nombre
+	 */
+	private void queryByName() {
+		IO.print("Nombre del departamento a buscar:");
+		String nombre = IO.readString();
+		System.out.println(employeeDAO.queryByName(nombre));
+		
+	}
 	
 	/**
 	 * (Jhovanny) - Consulta por id
@@ -99,7 +120,7 @@ public class MenuEmployee {
 	 */
 	public boolean menu() {
 		List<String> opciones = List.of("Add (A)"
-				, "Delete (B)"
+				, "Delete (D)"
 				, "Query by id (I)"
 				, "Query by name (N)"
 				, "Show (S)"
@@ -112,13 +133,13 @@ public class MenuEmployee {
 			addEmployee();
 			break;
 		case 'D':
-
+			deleteEmpleado(employeeDAO);
 			break;
 		case 'I':
 			queryByID();
 			break;
 		case 'N':
-			
+			queryByName();
 			break;
 		case 'S':
 			show();
