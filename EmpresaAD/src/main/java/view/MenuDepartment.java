@@ -31,7 +31,7 @@ public class MenuDepartment {
 	 * (Jhovanny) - Crear objeto de tipo Departamento
 	 * @param departmentDAO
 	 */
-	private static void addDepartament(DepartmentDAO departmentDAO) {
+	private static void addDepartment(DepartmentDAO departmentDAO) {
 		IO.print("Nombre ? ");
 		String nombre = IO.readString();
 		IO.print("jefe ? ");
@@ -43,6 +43,17 @@ public class MenuDepartment {
 		boolean added = departmentDAO.add(new Department(nombre, jefe));
 		IO.println(added ? "Añadido" : "No ha sido posible añadir el departamento");
 	}
+	
+	
+	private static void deleteDepartment(DepartmentDAO departmentDAO) {
+	    IO.print("Id ?");
+	    int id = IO.readInt();
+
+	    boolean deleted = departmentDAO.delete(id);
+	    IO.println(deleted ? "Eliminado" : "No ha sido posible eliminar el departamento");
+	    
+	}
+
 
 	/**
 	 * (Jhovanny) - Mostrar departamentos
@@ -59,6 +70,13 @@ public class MenuDepartment {
 		IO.print("ID del departamento a buscar:");
 		int id = IO.readInt();
 		System.out.println(departmentDAO.queryByID(id));
+	}
+	
+	private void queryByName() {
+		IO.print("Nombre del departamento a buscar:");
+		String nombre = IO.readString();
+		System.out.println(departmentDAO.queryByName(nombre));
+		
 	}
 	
 	/**
@@ -93,7 +111,7 @@ public class MenuDepartment {
 	 */
 	public boolean menu() {
 		List<String> opciones = List.of("Add (A)"
-				, "Delete (B)"
+				, "Delete (D)"
 				, "Query by id (I)"
 				, "Query by name (N)"
 				, "Show (S)"
@@ -103,16 +121,16 @@ public class MenuDepartment {
 		System.out.println(opciones);
 		switch (IO.readUpperChar()) {
 		case 'A':
-			addDepartament(departmentDAO);
+			addDepartment(departmentDAO);
 			break;
 		case 'D':
-
+			deleteDepartment(departmentDAO);
 			break;
 		case 'I':
 			queryByID();
 			break;
 		case 'N':
-			
+			queryByName();
 			break;
 		case 'S':
 			show(departmentDAO);
