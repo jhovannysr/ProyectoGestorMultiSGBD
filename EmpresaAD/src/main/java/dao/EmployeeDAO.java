@@ -10,6 +10,7 @@ import java.util.List;
 import model.Department;
 import model.Employee;
 
+
 public class EmployeeDAO {
 
 	/**
@@ -70,6 +71,74 @@ public class EmployeeDAO {
 		return false;
 	}
 
+	/**
+	 * (JeanPaul) - Consulta empleado por nombre
+	 * 
+	 * @param nombre
+	 * @return
+	 */
+	public Employee queryByName(String nombre) {
+	    String sql = """
+	            SELECT id, nombre, salario, departamento
+	            FROM empleado
+	            WHERE nombre = ?
+	            """;
+	    try {
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setString(1, nombre);
+	        ResultSet rs = ps.executeQuery();
+	        if (rs.next()) {
+	            return read(rs);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+
+	/**
+	 * (JeanPaul) - Elimina empleado por ID y actualiza el departamento del jefe a null si es jefe.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteEmployee(int id) {
+	    String sqlDelete = """
+	            DELETE FROM empleado
+	            WHERE id = ?
+	            """;
+	    
+	    String sqlUpdateJefeDepartment = """
+	            UPDATE departamento
+	            SET jefe = ?
+	            WHERE jefe = ?
+	            """;
+	    
+	    // Consultar empleado por ID para determinar si es jefe
+	    Employee empleado = queryByID(id);
+	    if (empleado != null) {
+	        try {
+	            PreparedStatement psDelete = conn.prepareStatement(sqlDelete);
+	            psDelete.setInt(1, id);
+	            int filasEliminadas = psDelete.executeUpdate();
+	            
+	            // Si es jefe, actualiza el departamento del jefe a null
+	            if (filasEliminadas > 0 && empleado.getDepartamento() != null && empleado.getDepartamento().equals(empleado.getNombre())) {
+	                PreparedStatement psUpdateJefeDepartment = conn.prepareStatement(sqlUpdateJefeDepartment);
+	                psUpdateJefeDepartment.setString(1, BD.MRK_NULL);
+	                psUpdateJefeDepartment.setString(2, empleado.getNombre());
+	               
+	                psUpdateJefeDepartment.executeUpdate();
+	            }
+	            
+	            return filasEliminadas > 0;
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	    }
+	    return false;
+	}
+	
 	/**
 	 * (Jhovanny) - Devuelve un Sring de todos los empleados
 	 * 
