@@ -5,15 +5,17 @@ Proyecto
         - show Jhovanny "Done"
         - modify Jhovanny "Done"
         - QueryByID Jhovanny "Done"
-        - QueryByName 
-        - Delete
+        - QueryByName Naim ""
+        - Delete Naim ""
+        - updateNullEmpleado Naim ""
     - EmpleadoGestor "Nos falta repartir los metodos"
         - add Jhovanny "Done"
         - show Jhovanny "Done"
         - modify Jhovanny "Done"
-        - QueryByID Jhovanny "Done"
-        - QueryByName 
-        - Delete
+        - QueryByID Jhovanny "Done"        
+        - QueryByName Paul ""
+        - Delete Paul ""
+        - updateNullJefe Paul ""
     - BD "singleton" *
 - io +
     - IO *
