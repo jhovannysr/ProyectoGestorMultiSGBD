@@ -79,9 +79,10 @@ public class DepartmentDAO {
 	    
 	    String sqlUpdateEmployee = """
 	            UPDATE empleado
-	            SET departamento = NULL
+	            SET departamento = 'null'
 	            WHERE departamento = ?
 	            """;
+	    var d = queryByID(id);
 	    
 	    try {
 	        PreparedStatement psDelete = conn.prepareStatement(sqlDelete);
@@ -90,7 +91,7 @@ public class DepartmentDAO {
 	        
 	        if (filasEliminadas > 0) {
 	            PreparedStatement psUpdateEmployee = conn.prepareStatement(sqlUpdateEmployee);
-	            psUpdateEmployee.setInt(1, id);
+	            psUpdateEmployee.setString(1, d.getNombre());
 	            psUpdateEmployee.executeUpdate();
 	        }
 	        
