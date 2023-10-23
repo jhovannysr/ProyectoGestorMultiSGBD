@@ -78,14 +78,22 @@ public class BD {
 		String sql2 = null;
 		if (BD.typeDB.equals("sqlite")) {
 			sql1 = """
-						CREATE TABLE IF NOT EXISTS agenda (
-							uuid STRING PRIMARY KEY,
-							nombre STRING NOT NULL,
-							telefono STRING,
-							edad INTEGER
-						)
+						CREATE TABLE IF NOT EXISTS departamento (
+					id INTEGER PRIMARY KEY AUTOINCREMENT, 
+					nombre TEXT NOT NULL,
+					jefe TEXT NOT NULL
+					)
+					""";
+			sql2= """
+					CREATE TABLE IF NOT EXISTS empleado (
+				    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+				    nombre TEXT NOT NULL,
+				    salario INTEGER, 
+				    departamento TEXT NOT NULL,
+				    FOREIGN KEY (departamento) REFERENCES departamento(nombre))
 					""";
 		}
+		
 		if (BD.typeDB.equals("mariadb")) {
 			sql1 = """
 						CREATE TABLE IF NOT EXISTS departamento (
