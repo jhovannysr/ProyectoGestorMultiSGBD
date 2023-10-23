@@ -16,10 +16,15 @@ SHOW COLUMNS FROM agenda;
 
 SELECT * from agenda;
 
-CREATE DATABASE empresa;
-CREATE TABLE IF NOT EXISTS departamento (id INT PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(255) NOT NULL,
- jefe VARCHAR(255) NOT NULL);
+Departamento
+CREATE TABLE IF NOT EXISTS departamento (id INT PRIMARY KEY AUTO_INCREMENT,
+					nombre VARCHAR(255) NOT NULL,
+					jefe INT);
 
-CREATE TABLE IF NOT EXISTS empleado (id INT PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(255) NOT NULL,
- salario INT, departamento VARCHAR(255) NOT NULL);
-
+Empleado
+CREATE TABLE IF NOT EXISTS empleado (
+						id INT PRIMARY KEY AUTO_INCREMENT, 
+						nombre VARCHAR(255) NOT NULL,
+						salario DECIMAL (10,2), 
+						departamento INT
+						);
