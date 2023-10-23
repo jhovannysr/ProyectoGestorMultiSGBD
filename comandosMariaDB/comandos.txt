@@ -1,20 +1,32 @@
-departamento                 empleado
-id int Pk                    id int PK
-nombre String                nombre String
-+jefe String                 salario int
-                             +departamento String FK
-
 -PARA INICIAR POR CMD: mysql -u root -p
 -para motrar las columnas de las tablas: SHOW COLUMNS FROM nombre_tabla
 SHOW DATABASES;
-
 USE db_test1;
-
 SHOW TABLES;
-
 SHOW COLUMNS FROM agenda;
-
 SELECT * from agenda;
+
+- Add (Departamento)
+INSERT INTO departamento (nombre, jefe) VALUES ('mecanica', NULL);
+- FindByID (Departamento) FindByName (Departamento)
+select * from departamento where id = ?;
+select * from departamento where nombre = ?;
+- Delete (Departamento)
+delete from departamento where id = 2;
+- Update (Departamento)
+update empleado set nombre = 'j', salario = 1400, departamento=3 where id = 2;
+
+Add (Empleado)
+INSERT INTO empleado (nombre, salario, departamento) VALUES ('naim', 1500.2, NULL);
+Add (Departamento)
+FindByID (Empleado) FindByName (Empleado)
+select * from empleado where id = ?;
+select * from empleado where nombre = ?;
+- Delete (Empleado)
+delete from empleado where id = 2;
+- Update (Empleado)
+update empleado set nombre = 'j', salario = 1400, departamento=3 where id = 2;
+
 
 Departamento
 CREATE TABLE IF NOT EXISTS departamento (id INT PRIMARY KEY AUTO_INCREMENT,
