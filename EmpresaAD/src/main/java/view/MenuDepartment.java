@@ -53,6 +53,16 @@ public class MenuDepartment {
 		boolean added = departmentDAO.add(d, sinJefe);
 		IO.println(added ? "Añadido" : "No ha sido posible añadir el departamento");
 	}
+	
+	
+	private static void deleteDepartment(DepartmentDAO departmentDAO) {
+	    IO.print("Id ?");
+	    int id = IO.readInt();
+
+	    boolean deleted = departmentDAO.delete(id);
+	    IO.println(deleted ? "Eliminado" : "No ha sido posible eliminar el departamento");
+	    
+	}
 
 	/**
 	 * (Jhovanny) - Mostrar departamentos
@@ -129,7 +139,7 @@ public class MenuDepartment {
 			addDepartament(departmentDAO);
 			break;
 		case 'D':
-//			deleteDepartment(departmentDAO);
+			deleteDepartment(departmentDAO);
 			break;
 		case 'I':
 			queryByID();
