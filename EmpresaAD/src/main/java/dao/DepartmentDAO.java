@@ -59,6 +59,39 @@ public class DepartmentDAO {
 		}
 		return false;
 	}
+	
+	
+	public boolean delete(int id) {
+	    String sqlDelete = """
+	            DELETE FROM departamento
+	            WHERE id = ?
+	            """;
+	    
+	    String sqlUpdateEmployee = """
+	            UPDATE empleado
+	            SET departamento = ?
+	            WHERE departamento = ?
+	            """;
+	    var d = queryByID(id);
+	    
+	    try {
+	        PreparedStatement psDelete = conn.prepareStatement(sqlDelete);
+	        psDelete.setInt(1, id);
+	        int filasEliminadas = psDelete.executeUpdate();
+	        
+	        if (filasEliminadas > 0) {
+	            PreparedStatement psUpdateEmployee = conn.prepareStatement(sqlUpdateEmployee);
+	            psUpdateEmployee.setString(1,BD.MRK_NULL);
+	            psUpdateEmployee.setString(2, d.getNombre());
+	            psUpdateEmployee.executeUpdate();
+	        }
+	        
+	        return filasEliminadas > 0;
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
+	    return false;
+	}
 
 	/**
 	 * (Jhovanny) - Devuele un List de todos los departamentos
