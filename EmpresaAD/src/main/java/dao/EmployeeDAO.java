@@ -1,15 +1,3 @@
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import io.IO;
-import model.Department;
-import model.Employee;
-
 public class EmployeeDAO {
 
 	/**
@@ -183,21 +171,35 @@ public class EmployeeDAO {
 	 * @return
 	 */
 	public boolean deleteEmployee(int id) {
-        String sqlUpdateDepartment = """
-            UPDATE empleado
-            SET departamento = NULL
-            WHERE id = ?
-            """;
+	    String sqlDelete = """
+	            DELETE FROM empleado
+	            WHERE id = ?
+	            """;
 
-        try {
-            PreparedStatement psUpdateDepartment = conn.prepareStatement(sqlUpdateDepartment);
-            psUpdateDepartment.setInt(1, id);
-            return psUpdateDepartment.executeUpdate() > 0;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return false;
-    }
+	    String sqlUpdateDepartment = """
+	            UPDATE departamento
+	            SET jefe = NULL
+	            WHERE jefe = ?
+	            """;
+	    var d = queryByID(id);
+
+	    try {
+	        PreparedStatement psDelete = conn.prepareStatement(sqlDelete);
+	        psDelete.setInt(1, id);
+	        int filasEliminadas = psDelete.executeUpdate();
+
+	        if (filasEliminadas > 0) {
+	            PreparedStatement psUpdateDepartment = conn.prepareStatement(sqlUpdateDepartment);
+	            psUpdateDepartment.setInt(1, d.getId());
+	            psUpdateDepartment.executeUpdate();
+	        }
+
+	        return filasEliminadas > 0;
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
+	    return false;
+	}
 	
 	/**
 	 * (Jhovanny) - Actualizar Empleado
