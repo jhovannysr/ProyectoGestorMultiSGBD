@@ -1,4 +1,3 @@
-package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -176,6 +175,29 @@ public class EmployeeDAO {
 	    }
 	    return null;
 	}
+	
+	/**
+	 * (JeanPaul) - Delete empleado
+	 * 
+	 * @param nombre
+	 * @return
+	 */
+	public boolean deleteEmployee(int id) {
+        String sqlUpdateDepartment = """
+            UPDATE empleado
+            SET departamento = NULL
+            WHERE id = ?
+            """;
+
+        try {
+            PreparedStatement psUpdateDepartment = conn.prepareStatement(sqlUpdateDepartment);
+            psUpdateDepartment.setInt(1, id);
+            return psUpdateDepartment.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 	
 	/**
 	 * (Jhovanny) - Actualizar Empleado
