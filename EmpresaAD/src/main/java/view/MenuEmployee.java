@@ -3,6 +3,7 @@ package view;
 import java.util.List;
 
 import dao.BD;
+import dao.DepartmentDAO;
 import dao.EmployeeDAO;
 import io.IO;
 import model.Department;
@@ -83,6 +84,17 @@ public class MenuEmployee {
 		String nombre = IO.readString();
 		System.out.println(employeeDAO.queryByName(nombre));
 	}
+	/**
+	 * (Jean Paul) - Borrar
+	 */
+	private static void deleteEmployee(EmployeeDAO employeeDAO) {
+	    IO.print("Id ?");
+	    int id = IO.readInt();
+
+	    boolean deleted = employeeDAO.deleteEmployee(id);
+	    IO.println(deleted ? "Eliminado" : "No ha sido posible eliminar el departamento");
+	    
+	}
 	
 	/**
 	 * (Jhovanny) - Modificar Empleado
@@ -141,7 +153,7 @@ public class MenuEmployee {
 			addEmployee();
 			break;
 		case 'D':
-//			deleteEmpleado(employeeDAO);
+			deleteEmployee(employeeDAO);
 			break;
 		case 'I':
 			queryByID();
