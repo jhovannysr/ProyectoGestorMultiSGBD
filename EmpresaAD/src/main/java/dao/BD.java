@@ -117,53 +117,6 @@ public class BD {
 	}
 	
 	/**
-	 * Actualiza la base de datos, si un jefe cambia de departamento, el jefe quedará a null
-	 */
-//	public static void updateDB() {
-//		IO.println("Actualizar base de datos");
-//		DepartmentDAO departmentDAO = new DepartmentDAO(); 
-//		List<Department> listaDepartamentos = departmentDAO.show();
-//		
-//		EmployeeDAO employeeDAO = new EmployeeDAO();
-//		List<Employee> listaEmpleados = employeeDAO.show();
-//		
-//		boolean hayJefe = false;
-//		var d = new Department();
-//		for (Department department : listaDepartamentos) { //Recorre departamentos
-//			for (Employee employee : listaEmpleados) { //Recorre empleados
-//				if (department.getJefe().equalsIgnoreCase(employee.getNombre())){ //Existe el nombre del jefe en empleados
-//					if (!department.getNombre().equalsIgnoreCase(employee.getDepartamento())) { //Si es distinto el nombre de departamento es igual al nombre de departamento de empleado
-//						d = department;
-//					}
-//				}
-//			}
-//		}
-//		
-//		if (!hayJefe) {
-//			d.setJefe(MRK_NULL);
-//			departmentDAO.modifyDepartment(d);
-//		}
-//		
-//		String sql = """
-//				UPDATE departamento
-//				SET nombre = ?, jefe = ?
-//				WHERE id = ?
-//				""";
-//		
-//		PreparedStatement ps;
-//		try {
-//			ps = conn.prepareStatement(sql);
-//			ps.setString(1, d.getNombre());
-//			ps.setString(2, d.getJefe());
-//			ps.setInt(3, d.getId());
-//			ps.executeUpdate();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		
-//	}
-	
-	/**
 	 * Borrar toda la base de datos
 	 */
 	public static void deleteDB() {
