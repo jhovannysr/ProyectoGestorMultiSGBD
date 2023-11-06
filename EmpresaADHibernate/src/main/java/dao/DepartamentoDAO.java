@@ -87,6 +87,12 @@ public class DepartamentoDAO {
         return departamento;
     }
 
+	public Departamento findById2(Integer id) {
+        logger.info("findById()");
+        Departamento departamento = hb.getManager().find(Departamento.class, id);
+        return departamento;
+    }
+	
 	/**
 	 * (Jhovanny) - Consulta por nombre
 	 * @param nombre
