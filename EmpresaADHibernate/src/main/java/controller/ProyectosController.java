@@ -42,7 +42,7 @@ public class ProyectosController {
 			case 'F':
 //				update();
 				break;
-			case 'B':
+			case 'E':
 //				delete();
 				break;
 			case 'S':
