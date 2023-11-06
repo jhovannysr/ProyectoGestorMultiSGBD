@@ -113,16 +113,24 @@ public class DepartamentoDAO {
 //	}
 	
 	
-	private void delete() {
-		boolean borrado = false;
-		Integer id = view.buscarPorId();
-		logger.info("Eliminando Departamento con id: " + id);
-		Departamento entity = dao.findById2(id);
-		if (entity != null) {
-			borrado = dao.delete(entity);
-		}
-		view.result(borrado ? "Borrado" : "No se ha podido borrar");
-	}
+	public boolean delete(Departamento entity) {
+	        logger.info("delete()");
+	        try {
+	            hb.getTransaction().begin();
+	            // Ojo que borrar implica que estemos en la misma sesión y nos puede dar problemas, por eso lo recuperamos otra vez
+	            entity = hb.getManager().find(Departamento.class, entity.getId());
+	            hb.getManager().remove(entity);
+	            hb.getTransaction().commit();
+	            return true;
+	        } catch (Exception e) {
+	        	
+	        }finally {
+	            if (hb.getTransaction().isActive()) {
+	                hb.getTransaction().rollback();
+	            }
+	        }
+			return false;
+	 }
 
 	public void cerrarHibernate() {
 		hb.close();
