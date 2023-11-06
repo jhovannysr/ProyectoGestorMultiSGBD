@@ -77,6 +77,15 @@ public class IO {
 	}
 
 	/**
+	 * Muestra objetos según un formato
+	 * 
+	 * @param objeto
+	 */
+	static public void printf(String format, Object... objects) {
+		System.out.printf(format, objects);
+	}
+	
+	/**
 	 * Lee un valor de tipo byte
 	 * 
 	 * @return
@@ -306,3 +315,4 @@ public class IO {
 	 */
 
 }
+
