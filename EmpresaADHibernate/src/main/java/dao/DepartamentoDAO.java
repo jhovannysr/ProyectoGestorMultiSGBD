@@ -113,19 +113,16 @@ public class DepartamentoDAO {
 //	}
 	
 	
-	/**
-	 * Borrar departamento
-	 * @param id
-	 * @return
-	 */
-//	public boolean delete(int id) {
-//		var d = hb.find(Departamento.class, id);
-//		if (d == null) {
-//			return false;
-//		}
-//		hb.remove(d);									//<-----------
-//	    return true;
-//	}
+	private void delete() {
+		boolean borrado = false;
+		Integer id = view.buscarPorId();
+		logger.info("Eliminando Departamento con id: " + id);
+		Departamento entity = dao.findById2(id);
+		if (entity != null) {
+			borrado = dao.delete(entity);
+		}
+		view.result(borrado ? "Borrado" : "No se ha podido borrar");
+	}
 
 	public void cerrarHibernate() {
 		hb.close();
