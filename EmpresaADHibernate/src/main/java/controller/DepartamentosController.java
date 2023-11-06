@@ -39,8 +39,8 @@ public class DepartamentosController {
 			case 'F':
 //				update();
 				break;
-			case 'B':
-//				delete();
+			case 'E':
+				delete();
 				break;
 			case 'S':
 				dao.cerrarHibernate();
@@ -92,14 +92,14 @@ public class DepartamentosController {
 //		view.result(actualizado ? "Modificado" : "No se ha podido modificar");
 //	}
 //
-//	private void delete() {
-//		boolean borrado = false;
-//		Integer id = view.buscarPorCodigo();
-//		logger.info("Eliminando Departamento con id: " + id);
-//		Departamento entity = dao.findById(id);
-//		if (entity != null) {
-//			borrado = dao.delete(id);
-//		}
-//		view.result(borrado ? "Borrado" : "No se ha podido borrar");
-//	}
+	private void delete() {
+		boolean borrado = false;
+		Integer id = view.buscarPorId();
+		logger.info("Eliminando Departamento con id: " + id);
+		Departamento entity = dao.findById2(id);
+		if (entity != null) {
+			borrado = dao.delete(entity);
+		}
+		view.result(borrado ? "Borrado" : "No se ha podido borrar");
+	}
 }
