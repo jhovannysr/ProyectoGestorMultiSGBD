@@ -38,7 +38,7 @@ public class EmpleadosController {
 			case 'F':
 //				update();
 				break;
-			case 'D':
+			case 'E':
 //				delete();
 				break;
 			case 'S':
