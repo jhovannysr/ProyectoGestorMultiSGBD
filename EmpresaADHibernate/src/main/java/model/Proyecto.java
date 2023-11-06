@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +24,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "hib_proyecto")
+@NamedQueries({
+	@NamedQuery(name = "Proyecto.findAll", 
+			query = "SELECT p FROM Proyecto p"),
+	@NamedQuery(name="Proyecto.findByNombre", 
+	query="SELECT p FROM Proyecto p WHERE p.nombre LIKE :nombre"),
+	@NamedQuery(name="Proyecto.findById", 
+	query="SELECT p FROM Proyecto p WHERE p.id = :id")
+})
 public class Proyecto {
 
 	@Id
