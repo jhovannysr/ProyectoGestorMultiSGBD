@@ -27,7 +27,37 @@ public class ProyectoDAO {
 		this.hb = HibernateManager.getInstance();
 		hb.open();
 	}
+	
+	/**
+	 * (JeanPaul) - Metodo para borrar
+	 * 
+	 * @param proyecto
+	 * @return
+	 */
 
+	public boolean delete(Proyecto entity) {
+	    logger.info("delete()");
+	    try {
+	        hb.getTransaction().begin();
+	        
+	        // Realiza las operaciones necesarias para eliminar un proyecto.
+	        // Por ejemplo, puedes quitar el proyecto de cualquier empleado que esté asignado a él
+	        // y luego eliminar el proyecto.
+	        
+	        hb.getManager().remove(entity);
+	        hb.getTransaction().commit();
+	        return true;
+	    } catch (Exception e) {
+	        IO.printlnError(e + "Error al eliminar proyecto.\n");
+	        if (hb.getTransaction().isActive()) {
+	            hb.getTransaction().rollback();
+	        }
+	    } finally {
+	        hb.close();
+	    }
+	    return false;
+	}
+	
 	/**
 	 * (Naim) - Añadir proyecto en la base de datos
 	 * 
@@ -88,6 +118,8 @@ public class ProyectoDAO {
 		List<Proyecto> list = query.getResultList();
 		return list;
 	}
+	
+	
 	
 	public void cerrarHibernate() {
 		hb.close();
