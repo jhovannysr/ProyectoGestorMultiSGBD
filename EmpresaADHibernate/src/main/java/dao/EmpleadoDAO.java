@@ -38,12 +38,10 @@ public class EmpleadoDAO {
 	 */
 	public boolean add(Empleado entity) {
 		logger.info("add()");
-//		hb.open();
 		hb.getTransaction().begin();
 		try {
 			hb.getManager().merge(entity);
 			hb.getTransaction().commit();
-//			hb.close();
 			return true;
         } catch (Exception e) {
         	IO.printlnError(e + "Error al añadir departamento. \n");
@@ -61,24 +59,10 @@ public class EmpleadoDAO {
 	 */
 	public List<Empleado> findAll() {
 		logger.info("findAll()");
-//		hb.open();
 		List<Empleado> list = hb.getManager().createNamedQuery("Empleado.findAll", Empleado.class).getResultList();
 		return list;
 	}
 	
-	/**
-	 * Muestra el contenido del EntityManager Empleado
-	 * @param msg
-	 */
-//	@SuppressWarnings("unchecked")
-//	public void show(String msg) {
-//		hb.getTransaction().begin(); //Inicia la transacción de recursos
-//		hb.getTransaction().commit(); //Escribe en la base de datos los cambios que no se hayan volcado.
-//		hb.clear();
-//		IO.println("* " + msg);
-//		hb.createQuery("FROM Empleado").getResultList().forEach(System.out::println);
-//		IO.println("-".repeat(80));
-//	}
 	
 	/**
 	 * (Jhovanny) - Consulta por id
@@ -104,57 +88,32 @@ public class EmpleadoDAO {
 		List<Empleado> list = query.getResultList();
 		return list;
 	}
-	
 	/**
-	 * Borrar Empleado
-	 * @param id
-	 * @return
-	 */
-//	public boolean delete(int id) {
-//		var e = hb.find(Empleado.class, id);
-//		if (e == null) {
-//			return false;
-//		}
-//		hb.remove(e);
-//	    return true;
-//	}
-	
-	/**
-	 * Borrar Empleado
-	 * @param idEmpleado
-	 * @return
-	 */
-//	public boolean deleteDepartamentoDeEmpleado(int idEmpleado) {
-//		var e = hb.find(Empleado.class, idEmpleado);
-//		if (e == null) {
-//			return false;
-//		}
-//		e.getDepartamento().removeEmpleado(e);
-//	    return true;
-//	}
-	
-	/**
-	 * Actualizar empleado
+	 * (JeanPaul) - Metodo para borrar
 	 * 
-	 * @param e
+	 * @param proyecto
 	 * @return
 	 */
-//	public boolean modifyEmployee(Empleado e, Integer idEmpleado) {
-//		int idDepartamentoNew = e.getDepartamento().getId();
-//		e = hb.find(Empleado.class, idEmpleado);
-//		e.setNombre(e.getNombre());
-//		e.setSalario(e.getSalario());
-//		
-//		//Añadir campo departamento del empleado
-//		if (idDepartamentoNew != 0) {
-//			var d = hb.find(Departamento.class, idDepartamentoNew);
-//			d.addEmpleado(e);
-//		} else { //Eliminar campo departamento del empleado
-//			deleteDepartamentoDeEmpleado(idEmpleado);
-//		}
-//		return true;
-//	}
+	public boolean delete(Empleado entity) {
+	    logger.info("delete()");
+	    try {
+	        hb.getTransaction().begin();       
+	        hb.getManager().remove(entity);
+	        hb.getTransaction().commit();
+	        return true;
+	    } catch (Exception e) {
+	        IO.printlnError(e + "Error al eliminar empleado.\n");
+	        if (hb.getTransaction().isActive()) {
+	            hb.getTransaction().rollback();
+	        }
+	    } finally {
+	        hb.close();
+	    }
+	    return false;
+	}
+
 	public void cerrarHibernate() {
 		hb.close();
 	}
 }
+
