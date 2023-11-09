@@ -40,7 +40,7 @@ public class EmpleadosController {
 //				update();
 				break;
 			case 'E':
-//				delete();
+				delete();
 				break;
 			case 'S':
 				dao.cerrarHibernate();
@@ -50,6 +50,17 @@ public class EmpleadosController {
 		}
 	}
 
+	private void delete() {
+	    boolean borrado = false;
+	    Integer id = view.buscarPorId();
+	    logger.info("Eliminando Empleado con id: " + id);
+	    Optional<Empleado> entity = dao.findById(id);
+	    if (entity.isPresent()) {
+	        borrado = dao.delete(entity.get());
+	    }
+	    view.result(borrado ? "Borrado" : "No se ha podido borrar");
+	}
+	
 	private void getByStartsName() {
 		String inicio = view.buscarPorInicioDelNombre();
 		logger.info("Obteniendo Empleados que empiezan por " + inicio);
@@ -78,6 +89,8 @@ public class EmpleadosController {
 		boolean anadido = dao.add(entity);
 		view.result(anadido ? "Añadido" : "No se ha podido añadir");
 	}
+}
+
 //
 //	private void update() {
 //		boolean modificado = false;
@@ -102,4 +115,4 @@ public class EmpleadosController {
 //		}
 //		view.result(borrado ? "Borrado" : "No se ha podido borrar");
 //	}
-}
+
