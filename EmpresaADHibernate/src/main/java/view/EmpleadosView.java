@@ -68,6 +68,8 @@ public class EmpleadosView {
 //		return e;
 //	}
 //
+	
+	
 	public String buscarPorInicioDelNombre() {
 		IO.print("El nombre empieza por ? ");
 		return IO.readString();
