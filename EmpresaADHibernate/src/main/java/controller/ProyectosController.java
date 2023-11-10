@@ -93,18 +93,13 @@ public class ProyectosController {
 		view.result(anadido ? "Añadido" : "No se ha podido añadir");
 	}
 	
-//	private void update() {
-//	boolean actualizado = false;
-//	Integer id = view.buscarPorCodigo();
-//	logger.info("Actualizando Departamento con id: " + id);
-//	Departamento entity = dao.findById(id);
-//	Departamento d = null;
-//	if (entity != null) {
-//		d = view.modificar(entity);
-//		actualizado = dao.update(d, id);
-//	}
-//	view.result(actualizado ? "Modificado" : "No se ha podido modificar");
-//}
+	private void update() {
+   	 	Integer id = view.buscarPorId();
+    		IO.print("Nuevo nombre: ");
+   		String nuevoNombre = IO.readString();
+    		boolean actualizado = dao.update(id, nuevoNombre);
+   		view.result(actualizado ? "Nombre actualizado" : "No se pudo actualizar el nombre");
+	}
 //
 //private void delete() {
 //	boolean borrado = false;
