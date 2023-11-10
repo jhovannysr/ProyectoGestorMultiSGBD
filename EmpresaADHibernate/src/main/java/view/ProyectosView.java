@@ -53,4 +53,13 @@ public class ProyectosView {
 	public void result(String msg) {
 		IO.println(msg);
 	}
+
+	public Proyecto update() {
+	    IO.print("Código del Proyecto a actualizar ? ");
+	    int id = IO.readInt();
+	    IO.print("Nuevo nombre ? ");
+	    String nuevoNombre = IO.readString();
+	    Proyecto p = Proyecto.builder().id(id).nombre(nuevoNombre).build();
+	    return p;
+	}
 }
