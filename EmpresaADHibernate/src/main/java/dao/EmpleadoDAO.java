@@ -88,6 +88,43 @@ public class EmpleadoDAO {
 		List<Empleado> list = query.getResultList();
 		return list;
 	}
+
+    /**
+     * (Naim) - Actualizar empleado
+     * 
+     * @param id
+     * @param nuevoNombre
+     * @param nuevoSalario
+     * @param nuevoIdDepartamento
+     * @return
+     */
+	
+	public boolean update(Empleado entity) {
+	    logger.info("update()");
+	    hb.getTransaction().begin();
+	    try {
+	        Empleado empleado = hb.getManager().find(Empleado.class, entity.getId());
+	        if (empleado != null) {
+	            empleado.setNombre(entity.getNombre());
+	            empleado.setSalario(entity.getSalario());
+	            empleado.setDepartamento(entity.getDepartamento());
+	            hb.getTransaction().commit();
+	            return true;
+	        } else {
+	            IO.printlnError("El empleado no existe.");
+	        }
+	    } catch (Exception e) {
+	        IO.printlnError(e + "Error al actualizar el empleado. \n");
+	    } finally {
+	        if (hb.getTransaction().isActive()) {
+	            hb.getTransaction().rollback();
+	        }
+	    }
+	    return false;
+	}
+
+
+	
 	/**
 	 * (JeanPaul) - Metodo para borrar
 	 * 
