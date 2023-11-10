@@ -118,6 +118,28 @@ public class ProyectoDAO {
 		List<Proyecto> list = query.getResultList();
 		return list;
 	}
+
+	public boolean update(Integer id, String nuevoNombre) {
+        logger.info("update()");
+        hb.getTransaction().begin();
+        try {
+            Proyecto proyecto = hb.getManager().find(Proyecto.class, id);
+            if (proyecto != null) {
+                proyecto.setNombre(nuevoNombre);
+                hb.getTransaction().commit();
+                return true;
+            } else {
+                IO.printlnError("No se encontró el proyecto con ID: " + id);
+            }
+        } catch (Exception e) {
+            IO.printlnError(e + "Error al actualizar el nombre del proyecto. \n");
+        } finally {
+            if (hb.getTransaction().isActive()) {
+                hb.getTransaction().rollback();
+            }
+        }
+        return false;
+    }
 	
 	
 	
