@@ -42,32 +42,41 @@ public class EmpleadosView {
 				.build();
 		return e;
 	}
-//
-//	public Empleado modificar(Empleado e) {
-//		IO.printf("Nombre [%s] ? ", e.getNombre());
-//		String nombre = IO.readString();
-//		if (!nombre.isBlank()) {
-//			e.setNombre(nombre);
-//		}
-//		IO.printf("Salario [%s] ? ", e.getSalario());
-//		Double salario = IO.readDoubleOrNull();
-//		if (salario != null) {
-//			e.setSalario(salario);
-//		}
-//		IO.printf("Nacido (aaaa-mm-dd) [%s] ? ", e.getNacido());
-//		LocalDate nacido = IO.readLocalDateOrNull();
-//		if (nacido != null) {
-//			e.setNacido(nacido);
-//		}
-//		Departamento d = e.getDepartamento();
-//		IO.printf("Departamento [%s] ? ", d == null ? "sin departamento!!!" : d.show());
-//		Integer departamento = IO.readIntOrNull();
-//		if (departamento != null) {
-//			e.setDepartamento(Departamento.builder().id(departamento).build());
-//		}
-//		return e;
-//	}
-//
+
+	public Empleado update() {
+	    Integer id = buscarPorId();
+	    Optional<Empleado> entity = new EmpleadoDAO().findById(id);
+	    if (entity.isPresent()) {
+	        Empleado empleado = entity.get();
+	        
+	        IO.print("Nuevo nombre [" + empleado.getNombre() + "] ? ");
+	        String nuevoNombre = IO.readString();
+	        if (nuevoNombre.isEmpty()) {
+	            nuevoNombre = empleado.getNombre();
+	        }
+
+	        IO.print("Nuevo salario [" + empleado.getSalario() + "] ? ");
+	        Float nuevoSalario = IO.readFloatOrNull();
+	        if (nuevoSalario == null) {
+	            nuevoSalario = empleado.getSalario();
+	        }
+
+	        new DepartamentoDAO().findAll().forEach(System.out::println);
+	        IO.print("Nuevo ID de Departamento [" + empleado.getDepartamento().getId() + "] ? ");
+	        Integer nuevoIdDepartamento = IO.readInt();
+	        
+	        Empleado e = Empleado.builder()
+	                .id(empleado.getId())
+	                .nombre(nuevoNombre)
+	                .salario(nuevoSalario)
+	                .departamento(Departamento.builder().id(nuevoIdDepartamento).build())
+	                .build();
+	        return e;
+	    } else {
+	        IO.println("No se encontró un empleado con el código proporcionado.");
+	        return null;
+	    }
+	}
 	
 	
 	public String buscarPorInicioDelNombre() {
