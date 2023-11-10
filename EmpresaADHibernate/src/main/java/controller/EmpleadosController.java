@@ -91,19 +91,13 @@ public class EmpleadosController {
 	}
 }
 
-//
-//	private void update() {
-//		boolean modificado = false;
-//		Integer id = view.buscarPorCodigo();
-//		logger.info("Actualizando Empleado con id: " + id);
-//		Empleado entity = dao.findById(id);
-//		Empleado d = null;
-//		if (entity != null) {
-//			d = view.modificar(entity);
-//			modificado = dao.update(d);
-//		}
-//		view.result(modificado ? "Modificado" : "No se ha podido modificar");
-//	}
+	private void update() {
+	    Empleado empleado = view.update();
+	    if (empleado != null) {
+	        boolean actualizado = dao.update(empleado);
+	        view.result(actualizado ? "Empleado actualizado" : "No se pudo actualizar el empleado");
+	    }
+	}
 //
 //	private void delete() {
 //		boolean borrado = false;
