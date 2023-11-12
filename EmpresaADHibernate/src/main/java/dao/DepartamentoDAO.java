@@ -123,30 +123,28 @@ public class DepartamentoDAO {
 	 */
 	public boolean delete(Departamento entity) {
         logger.info("delete()");
-        
-        //Almacenar los empleados del departamento a eliminar
-        TypedQuery<Empleado> query =hb.getManager().createNamedQuery("Empleado.findByEmpleadoDepartamento", Empleado.class)
-				.setParameter("departamento", entity);
-        List<Empleado> list = query.getResultList();
-        for (Empleado empleado : list) {
-        	entity.removeEmpleado(empleado);
-		}
         try {
-        	// Ojo que borrar implica que estemos en la misma sesión y nos puede dar problemas, por eso lo recuperamos otra vez
-        	hb.getTransaction().begin();
-            entity = hb.getManager().find(Departamento.class, entity.getId());
+            hb.getTransaction().begin();
+
+            // Actualizar empleados para que el departamento sea nulo
+            Set<Empleado> empleados = entity.getEmpleados();
+            for (Empleado empleado : empleados) {
+                empleado.setDepartamento(null);
+            }
+
             hb.getManager().remove(entity);
             hb.getTransaction().commit();
             return true;
         } catch (Exception e) {
-        	
-        }finally {
+            IO.printlnError(e + "Error al eliminar departamento.\n");
             if (hb.getTransaction().isActive()) {
                 hb.getTransaction().rollback();
             }
+        } finally {
+            hb.close();
         }
-		return false;
- }
+        return false;
+    }
 
 	public void cerrarHibernate() {
 		hb.close();
