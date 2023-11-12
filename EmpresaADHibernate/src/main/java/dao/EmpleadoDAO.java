@@ -132,22 +132,29 @@ public class EmpleadoDAO {
 	 * @return
 	 */
 	public boolean delete(Empleado entity) {
-	    logger.info("delete()");
-	    try {
-	        hb.getTransaction().begin();       
-	        hb.getManager().remove(entity);
-	        hb.getTransaction().commit();
-	        return true;
-	    } catch (Exception e) {
-	        IO.printlnError(e + "Error al eliminar empleado.\n");
-	        if (hb.getTransaction().isActive()) {
-	            hb.getTransaction().rollback();
+	        logger.info("delete()");
+	        try {
+	            hb.getTransaction().begin();
+
+	            // Si el empleado es un jefe de departamento, actualizar el departamento para que el jefe sea nulo
+	            Departamento departamento = entity.getDepartamento();
+	            if (departamento != null && departamento.getJefe() != null && departamento.getJefe().equals(entity)) {
+	                departamento.setJefe(null);
+	            }
+
+	            hb.getManager().remove(entity);
+	            hb.getTransaction().commit();
+	            return true;
+	        } catch (Exception e) {
+	            IO.printlnError(e + "Error al eliminar empleado.\n");
+	            if (hb.getTransaction().isActive()) {
+	                hb.getTransaction().rollback();
+	            }
+	        } finally {
+	            hb.close();
 	        }
-	    } finally {
-	        hb.close();
+	        return false;
 	    }
-	    return false;
-	}
 
 	public void cerrarHibernate() {
 		hb.close();
